@@ -6,4 +6,7 @@ setup(
     packages=['social_publisher',],
     license='MIT',
     long_description=open('README.txt').read(),
+    install_requires=[
+        'vkontakte=1.3.2',
+    ],
 )
