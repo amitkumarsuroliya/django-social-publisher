@@ -1,13 +1,17 @@
 import vkontakte
+from social_publisher.utils import upload_file_to_vk_wall
 
 
 class SocialPublisher(object):
     vk_access_token = ''
+    image_path = ''
 
     def publish(self):
-        vk = vkontakte.API(token=self.vk_access_token)
-        vk.get('wall.post', message='Test')
+        self.publish_to_vk_wall()
 
-    def get_vkontakte_albums(self):
+    def publish_to_vk_wall(self):
         vk = vkontakte.API(token=self.vk_access_token)
-        return vk.get('photos.getAlbums')
+        photo = upload_file_to_vk_wall(vk, self.image_path)
+        attachments = photo[0]['id']
+        attachments += ',http://google.com'
+        vk.get('wall.post', message='Test message', attachments=attachments)
