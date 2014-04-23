@@ -2,11 +2,12 @@ import json
 import requests
 
 
-def publish_to_vk_wall(vk, image_path):
+def publish_to_vk_wall(vk, image_path, url, text):
     photo = upload_photo_to_vk_wall(vk, image_path)
     attachments = photo[0]['id']
-    attachments += ',http://google.com'
-    vk.get('wall.post', message='Test message', attachments=attachments)
+    attachments += ',%s' % url
+    message = '%(text)s %(url)s %(tags)s' % {'text': text, 'url': url, 'tags': []}
+    vk.get('wall.post', message=message, attachments=attachments)
 
 
 def upload_photo_to_vk_wall(vk, file_path):

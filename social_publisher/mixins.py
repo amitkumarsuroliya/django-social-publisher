@@ -11,4 +11,6 @@ class SocialPublisher(object):
 
     def publish_to_vk(self):
         vk = vkontakte.API(token=self.vk_access_token)
-        publish_to_vk_wall(vk, self.image_path)
+        url = 'http://google.com'
+        text = 'Test message'
+        publish_to_vk_wall(vk, self.image_path, url, text)
