@@ -3,11 +3,13 @@ import requests
 
 
 def publish_to_vk_wall(vk, image_path, url, text):
-    photo = upload_photo_to_vk_wall(vk, image_path)
-    attachments = photo[0]['id']
-    attachments += ',%s' % url
+    attachments = []
+    if image_path:
+        photo = upload_photo_to_vk_wall(vk, image_path)
+        attachments.append(photo[0]['id'])
+    attachments.append(url)
     message = '%(text)s %(url)s %(tags)s' % {'text': text, 'url': url, 'tags': []}
-    vk.get('wall.post', message=message, attachments=attachments)
+    vk.get('wall.post', message=message, attachments=','.join(attachments))
 
 
 def upload_photo_to_vk_wall(vk, file_path):

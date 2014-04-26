@@ -9,5 +9,6 @@ setup(
     install_requires=[
         'vkontakte=1.3.2',
         'requests=2.2.1',
+        'django=1.6.1',
     ],
 )
